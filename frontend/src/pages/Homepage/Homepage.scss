@@ -1,0 +1,17 @@
+.Homepage {
+  display: flex; // Enables flexbox on the body
+  justify-content: center; // Horizontally centers child elements
+  align-items: center; // Vertically centers child elements
+
+  overflow: hidden; // Prevent overflow
+
+  width: 100%;
+  height: 100%;
+
+  color: #fff;
+
+  background: #000;
+
+  //border: 2px solid #f0f;
+}
+

@@ -1,0 +1,199 @@
+
+
+.Sidebar {
+  width: 240px;
+  color: #fff;
+  background-color: #151b23;
+  transition: width 0.3s ease-in-out;
+
+  &.hidden {
+    display: none;
+  }
+
+  &.collapsed {
+    width: 64px;
+
+    // Hide text labels while keeping icons visible
+    .menu-label,
+    .menu-right.arrow {
+      display: none;
+    }
+
+    // Center icons since text is hidden
+    .menu-left {
+      justify-content: center;
+      padding-left: 0 !important; // Remove extra indentation
+      width: 100%; // Make sure icons take the full width
+    }
+
+    .menu-icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .menu-items {
+      margin-left: 8px;
+    }
+
+    .submenu-items {
+      margin-left: 8px;
+    }
+  }
+
+
+  .menu-section {
+    //border: 1px solid #f00;
+
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+
+    &:first-child {
+      margin-top: 20px;
+    }
+  }
+
+
+
+
+  .sidebar-menu-item {
+    display: flex; // Flexbox for layout
+    justify-content: space-between; // Ensures left and right sections align correctly
+    align-items: center; // Vertically centers child divs
+    overflow: hidden; // Hide overflowing content
+    background: #151b23;
+    //border-radius: 10px;
+    transition: background 0.2s;
+    cursor: pointer;
+
+    &.main-menu-item {
+      padding: 10px 14px;
+      //border: 1px solid #4b0082;
+
+      &:hover { background: #4c008270; }
+
+      .menu-icon {
+        width: 28px !important;
+        height: 28px !important;
+      }
+
+      .menu-label {
+        font-size: 18px !important;
+        font-weight: bold !important;
+      }
+    }
+  }
+
+  .menu-left {
+    display: flex;
+    align-items: center; // Vertically centers child divs
+    gap: 10px;
+
+    .menu-label {
+      font-size: 14px;
+    }
+  }
+
+  .menu-right {
+    display: flex;
+    align-items: center; // Vertically centers child divs
+
+    &.arrow {
+      width: 24px;
+      height: 24px;
+      mask-image: none;
+      mask-repeat: no-repeat;
+      mask-position: center;
+      mask-size: contain;
+      background: #fff;
+      transition: transform 0.2s ease-in-out; // Smooth transition effect
+
+      &.open-it {
+        transform: rotate(0deg);
+        mask-image: url('../../assets/icons/caret-down-md.svg');
+      }
+
+      &.close-it {
+        transform: rotate(180deg);
+        mask-image: url('../../assets/icons/caret-down-md.svg');
+      }
+    }
+  }
+
+
+
+
+  .menu-icon {
+    width: 20px;
+    height: 20px;
+
+    mask-image: none;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+
+    background-color: #fff;
+
+
+    &.icon-home { mask-image: url('../../assets/icons/home.svg'); }
+    &.icon-settings { mask-image: url('../../assets/icons/settings-cog.svg'); }
+    &.icon-bug { mask-image: url('../../assets/icons/bug.svg'); }
+    &.icon-temp { mask-image: url('../../assets/icons/link.svg'); }
+  }
+
+
+  .menu-items {
+    margin-left: 20px;
+    //border: 1px solid #f0f;
+
+    .menu-item {
+      text-decoration: none;
+    }
+
+    .menu-item .sidebar-menu-item {
+      display: flex;
+      align-items: center; // Vertically centers child divs
+      gap: 10px;
+      padding: 10px;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 10px;
+      transition: background 0.2s;
+
+      &:hover {
+        background: #d5000070;
+      }
+    }
+  }
+
+
+  .menu-items .menu-item.active .sidebar-menu-item {
+    background: #d50000cc;
+  }
+
+  /*
+  .menu-section:has(.menu-items .menu-item.active) .sidebar-menu-item.main-menu-item {
+    background: #4b0082cc;
+  }
+  */
+
+  .menu-section .sidebar-menu-item.main-menu-item.active {
+    background: #4b0082cc;
+  }
+
+
+  .submenu {
+    .sidebar-menu-item {
+      padding: 10px;
+      transition: background 0.2s;
+
+      &:hover { background: #4c008270; }
+    }
+
+    .submenu-items {
+      margin-left: 20px;
+    }
+  }
+}
+

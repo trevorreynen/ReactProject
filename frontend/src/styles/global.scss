@@ -1,0 +1,55 @@
+
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Roboto:wght@400;700&display=swap');
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  color: #000;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+
+  //background-color: #aaa;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+
+  height: 100vh;
+}
+
+.App-Wrapper {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  //gap: 10px;
+
+  flex: 1; // Fill remaining vertical space below the header
+
+  //border: 2px solid #0ff;
+
+  &.collapsed {
+    grid-template-columns: 64px 1fr;
+  }
+
+  &.hidden {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+

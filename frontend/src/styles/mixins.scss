@@ -1,0 +1,63 @@
+@mixin scrollable($overflowRule: auto) {
+  overflow-x: hidden;
+  overflow-y: $overflowRule;
+
+  &::-webkit-scrollbar {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 8px; // Width of the vertical scrollbar
+  }
+
+  &::-webkit-scrollbar-thumb {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background: #464749; // Default color of the scrollbar thumb
+    border-radius: 4px; // Round the scrollbar thumb edges
+  }
+
+  &::-webkit-scrollbar-track {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background: #949596; // Background color of the scrollbar track
+    border-radius: 4px; // Round the scrollbar track edges
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #545657; // Darker color when the thumb is hovered
+  }
+}
+
+@mixin ScreenWrapper() {
+  display: flex; // Enables flexbox on the body
+  justify-content: center; // Horizontally centers child elements
+  align-items: center; // Vertically centers child elements
+
+  overflow: hidden;
+
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+
+  //background-color: #aaa;
+
+  //border: 2px solid #f0f;
+}
+
+@mixin OuterBox() {
+  @include scrollable();
+
+  display: flex;
+  flex-direction: column;
+
+  position: absolute; // Ensure it stays relative to the viewport
+  top: 50px; // 10px margin from the top
+  left: 10px; // 10px margin from the left
+  right: 10px; // 10px margin from the right
+  bottom: 10px; // 10px margin from the bottom
+
+  overflow: scroll;
+  overflow-x: hidden; // Hide horizontal scrollbar
+  overflow-y: auto; // Keep vertical scrollbar visible
+
+  border-radius: 10px;
+}
