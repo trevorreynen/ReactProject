@@ -1,0 +1,98 @@
+.IngredientSummary {
+
+  background-color: #aaa;
+
+
+
+  table.table-ingredient-summary {
+    width: auto;
+    margin: 0 auto;
+
+
+    border-collapse: collapse; // Default is separate. Separate = 2px borders basically even when set to 1px for everything.
+    border-spacing: 0px; // Default for a table is 2px.
+
+
+    .header-row {
+
+      background-color: #007aa5;
+      color: #fff;
+
+
+
+      .th-ingredient {
+        width: 300px;
+
+        border: 1px solid #fff;
+      }
+
+      .th-total {
+        width: 100px;
+
+        border: 1px solid #fff;
+      }
+
+      .th-owned {
+        width: 100px;
+
+        border: 1px solid #fff;
+      }
+
+      .th-to-buy {
+        width: 100px;
+
+        border: 1px solid #fff;
+      }
+    }
+
+
+    tbody tr.main-rows:nth-child(odd) {
+      background-color: #ebecf0;
+    }
+
+    tbody tr.main-rows:nth-child(even) {
+      background-color: #c4d8e2;
+    }
+
+    tr.main-rows {
+
+
+
+      .td-ingredient {
+
+
+        border: 1px solid #fff;
+      }
+
+      .td-total {
+
+
+        border: 1px solid #fff;
+      }
+
+      .td-owned {
+
+
+        border: 1px solid #fff;
+      }
+
+      .td-to-buy {
+
+
+        border: 1px solid #fff;
+      }
+    }
+
+
+
+
+
+
+
+
+
+  }
+
+
+}
+

@@ -6,6 +6,7 @@ export enum SidebarState {
   Expanded = 'expanded',
   Collapsed = 'collapsed',
   Hidden = 'hidden',
+  Minimal = 'minimal',
 }
 
 // Define the shape of the Common State

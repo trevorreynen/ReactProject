@@ -1,0 +1,71 @@
+.NutritionFactTable {
+  overflow-x: auto;
+
+
+  table {
+    width: auto;
+    //margin: 0 auto;
+
+    color: #000;
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+    text-align: left;
+
+    border-collapse: separate; // Default is separate. Separate = 2px borders basically even when set to 1px for everything.
+    border-spacing: 0px; // Default for a table is 2px.
+
+    th, td {
+      padding: 2px;
+
+      border: 1px solid #fff;
+    }
+
+    th.product-header,
+    .subheader-row {
+      color: #fff;
+      font-weight: bold;
+      text-align: center;
+
+      background-color: #007aa5 !important;
+    }
+
+    th.product-header { font-size: 18px; white-space: normal; }
+
+    .subheader-row {
+      font-size: 16px;
+
+      border-top: 4px double #fff;
+    }
+
+    [data-cell='A1'] { // Edit empty cell, 'A1'
+      border-top: 1px solid #000;
+      border-left: 1px solid #000;
+      border-bottom: 1px solid #000;
+      background: #ccc;
+    }
+
+
+
+    tbody tr {
+      height: 21px;
+      min-height: 21px;
+
+      font-size: 13px;
+    }
+
+
+    // Table body row alternating colors.
+    tbody tr:nth-child(odd)  { background-color: #ebecf0; }
+    tbody tr:nth-child(even) { background-color: #c4d8e2; }
+
+
+    .section-separator { border-bottom: 4px solid #000; }
+    .text-center { text-align: center; }
+    .border-left-separator { border-left: 1px solid #000; }
+    .border-right-separator { border-right: 2px solid #000; }
+
+
+
+
+  }
+}

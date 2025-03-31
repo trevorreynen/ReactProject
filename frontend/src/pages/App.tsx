@@ -1,5 +1,5 @@
 // =========================< IMPORTS: REACT >=================================
-import { Suspense, lazy } from 'react'
+import { Suspense, lazy, useMemo } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 // =========================< IMPORTS: LAYOUT >================================
@@ -13,6 +13,7 @@ import { useCommonStore } from '@/hooks/common-context'
 
 
 // =========================< IMPORTS: COMPONENTS >============================
+import DelayedFallback from '@/components/Loading/DelayedFallback'
 import Header from '@/components/Header/Header'
 import Sidebar from '@/components/Sidebar/Sidebar'
 
@@ -24,27 +25,31 @@ import '@/styles/global.scss'
 export default function App() {
   const { sidebarState } = useCommonStore()
 
+  const RouteTree = useMemo(() => (
+    <Suspense fallback={<DelayedFallback delay={200} />}>
+      <Routes>
+        {routesConfig.map(({ path, component }, index) => {
+          const Component = lazy(component)
+          return <Route key={index} path={path} element={<Component />} />
+        })}
+      </Routes>
+    </Suspense>
+  ), []) // no deps = never re-render
+
 
   return (
     <Router>
       <div className='App'>
 
-        <div className=''>
-          <Header />
-        </div>
+        <Header />
 
 
         <div className={`App-Wrapper ${sidebarState}`}>
           <Sidebar />
 
-          <Suspense fallback={<div>Loading...</div>}>
-              <Routes>
-                {routesConfig.map(({ path, component }, index) => {
-                  const Component = lazy(component)
-                  return <Route key={index} path={path} element={<Component />} />
-                })}
-              </Routes>
-          </Suspense>
+          <div className='Router-Wrapper'>
+            {RouteTree}
+          </div>
         </div>
 
       </div>

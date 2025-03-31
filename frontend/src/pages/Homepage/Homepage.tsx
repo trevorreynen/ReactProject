@@ -12,13 +12,13 @@ import { useContext, useMemo } from 'react'
 
 
 // =========================< IMPORTS: STYLES >================================
-import './Homepage.scss'
+import './HomePage.scss'
 
 
 
 
 
-export default function Homepage() {
+export default function HomePage() {
 
 
 
@@ -26,14 +26,14 @@ export default function Homepage() {
 
 
   return (
-    <div className='Homepage'>
+    <div className='HomePage'>
 
 
 
 
 
 
-      <p>Homepage</p>
+      <p>HomePage</p>
 
 
 

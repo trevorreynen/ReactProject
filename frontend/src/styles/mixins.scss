@@ -1,3 +1,7 @@
+// @use '@/styles/mixins.scss';
+// @include mixins.scrollable();
+// @include mixins.ScreenWrapper;
+
 @mixin scrollable($overflowRule: auto) {
   overflow-x: hidden;
   overflow-y: $overflowRule;
@@ -27,37 +31,71 @@
   }
 }
 
-@mixin ScreenWrapper() {
-  display: flex; // Enables flexbox on the body
-  justify-content: center; // Horizontally centers child elements
-  align-items: center; // Vertically centers child elements
 
-  overflow: hidden;
 
-  width: 100%;
-  height: 100%;
-  padding: 10px;
-
-  //background-color: #aaa;
-
-  //border: 2px solid #f0f;
-}
-
-@mixin OuterBox() {
+@mixin UseScrollBar() {
   @include scrollable();
-
-  display: flex;
-  flex-direction: column;
-
-  position: absolute; // Ensure it stays relative to the viewport
-  top: 50px; // 10px margin from the top
-  left: 10px; // 10px margin from the left
-  right: 10px; // 10px margin from the right
-  bottom: 10px; // 10px margin from the bottom
-
-  overflow: scroll;
-  overflow-x: hidden; // Hide horizontal scrollbar
-  overflow-y: auto; // Keep vertical scrollbar visible
-
-  border-radius: 10px;
+  overflow-y: auto;
+  overflow-x: hidden; // Hide overflow content that leads outside of element, horizontally (left or right)
+  flex-shrink: 0;
+  height: 100%;
 }
+
+@mixin FlexSpaceBetween() {
+  display: flex; // Flexbox for layout
+  justify-content: space-between; // Puts empty space between child divs
+  align-items: center; // Vertically centers child divs
+}
+
+@mixin FlexCenter() {
+  display: flex; // Flexbox for layout
+  justify-content: center; // Horizontally centers child elements
+  align-items: center; // Vertically centers child divs
+}
+
+@mixin Flex() {
+  display: flex;
+  align-items: center;
+}
+
+@mixin SidebarArrowStyle() {
+  width: 24px;
+  height: 24px;
+  mask-image: url('../../assets/icons/caret-down-md\ \(Coolicons\).svg');
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  background-color: #fff;
+  transition: transform 0.2s ease-in-out; // Smooth transition effect
+
+  &.open-it { transform: rotate(0deg); }
+  &.close-it { transform: rotate(180deg); }
+}
+
+@mixin IconPlaceholder($size: 20px) {
+  width: $size;
+  height: $size;
+  mask-image: none;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+
+  // Only apply background when it's a real icon
+  &:not(.empty-placeholder-icon) {
+    background-color: #fff;
+  }
+
+  &.icon-home { mask-image: url('../../assets/icons/home\ \(Calcite\).svg'); }
+  &.icon-settings { mask-image: url('../../assets/icons/settings-cog\ \(Smoothie\).svg'); }
+  &.icon-bug { mask-image: url('../../assets/icons/bug\ \(Dazzle\).svg'); }
+  &.icon-link { mask-image: url('../../assets/icons/link-2\ \(Xnix\).svg'); }
+  &.icon-alert { mask-image: url('../../assets/icons/alert\ \(Uxaspects\).svg'); }
+  &.icon-alert-filled { mask-image: url('../../assets/icons/alert-filled\ \(Uxaspects\).svg'); }
+  &.icon-alert-square-circle { mask-image: url('../../assets/icons/alert-square\ \(Micions\).svg'); }
+  &.icon-add { mask-image: url('../../assets/icons/add\ \(Xnix\).svg'); }
+  &.icon-down-right-1 { mask-image: url('../../assets/icons/arrow-right-corner-down\ \(Minimal\).svg'); }
+  &.icon-down-right-2 { mask-image: url('../../assets/icons/arrow-square-down-right\ \(Dazzle\).svg'); }
+  &.icon-menu { mask-image: url('../../assets/icons/burger-menu\ \(Start\).svg'); }
+}
+
+

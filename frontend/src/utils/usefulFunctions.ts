@@ -1,8 +1,16 @@
+// import {  } from '@/utils/usefulFunctions'
+
+// Purpose: This file contains a bunch of functions I have found useful in many scenarios of multiple years
+// of coding that I just keep inside one file. I'd rather keep this one file of a collection of functions
+// than add one function at a time based on what is needed. Feels far more useful to just have this one file always.
+
+
 // Type definition for the classNames function arguments
 type classNamesArg = string | undefined | Record<string, boolean | null | undefined>
 
 /**
  * Combines class names dynamically.
+ *
  * @param args - A mix of strings or objects defining class names.
  * @returns A single string of combined class names.
  *
@@ -37,6 +45,7 @@ export function classNames(...args: classNamesArg[]) {
 
 /**
  * Checks if a value is numeric.
+ *
  * @param n - Any value to check.
  * @returns True if the value is numeric, false otherwise.
  *
@@ -45,12 +54,16 @@ export function classNames(...args: classNamesArg[]) {
  * isNumeric(123)       // Output: true
  * isNumeric('123.45')  // Output: true
  * isNumeric('abc')     // Output: false
+ * isNumeric(true)      // Output: false
+ * isNumeric(null)      // Output: false
+ * isNumeric({})        // Output: false
  * ```
  */
 export const isNumeric = (n: any) => !isNaN(parseFloat(n)) && isFinite(n)
 
 /**
  * Converts a number to a fixed decimal string.
+ *
  * @param input - The number to format.
  * @param fractionDigits - Number of decimal places.
  * @returns The number formatted as a string.
@@ -68,6 +81,7 @@ export const toFixed = (input: any, fractionDigits: number) => {
 
 /**
  * Capitalizes the first letter one or multiple words in a string.
+ *
  * @param input - The string to capitalize.
  * @returns The capitalized string.
  *
@@ -95,6 +109,7 @@ export const capitalize = (input: string): string => {
 
 /**
  * Pads a number with leading zeros to a specified length.
+ *
  * @param num - The number to pad.
  * @param length - The desired string length.
  * @returns The padded string.
@@ -118,6 +133,7 @@ export const padNumber = (num: number, length: number) => {
 
 /**
  * Formats a duration in milliseconds into a human-readable time.
+ *
  * @param ms - The duration in milliseconds.
  * @param includeMs - Whether to include milliseconds in the output.
  * @returns A formatted time string.
@@ -127,6 +143,7 @@ export const padNumber = (num: number, length: number) => {
  * formatTimeDurationLeft(3661000)       // Output: '01:01:01'
  * formatTimeDurationLeft(-61000, true)  // Output: '-01:01.000'
  * formatTimeDurationLeft(45000)         // Output: '00:45'
+ * formatTimeDurationLeft(-45000, false) // Output: '-00:45'
  * ```
  */
 export const formatTimeDurationLeft = (ms: number, includeMs = false): string => {
@@ -158,6 +175,7 @@ export const formatTimeDurationLeft = (ms: number, includeMs = false): string =>
 
 /**
  * Clamps a number between a minimum and maximum value.
+ *
  * @param number - The number to clamp.
  * @param min - The minimum value.
  * @param max - The maximum value.
@@ -176,6 +194,8 @@ export const clamp = (number: number, min: number, max: number) => {
 
 /**
  * Checks if two arrays contain the same elements.
+ *
+ * ⚠️ NOTE: This function mutates the input arrays via .sort(). Use copies to avoid altering original arrays.
  *
  * @param array1 - The first array.
  * @param array2 - The second array.
@@ -197,6 +217,7 @@ export const arraysAreEqual = (array1: string[], array2: string[]): boolean => {
 
 /**
  * Formats a duration (in milliseconds) to the local time it ends.
+ *
  * @param ms - The duration in milliseconds.
  * @param showAmPm - Whether to include AM/PM in the output.
  * @param includeMs - Whether to include milliseconds in the output (ignored in new format).
@@ -226,6 +247,7 @@ export const formatEndTime = (ms: number, showAmPm = true): string => {
 
 /**
  * Converts an ISO 8601 date string to MM/DD/YYYY HH:MM:SS AM/PM format.
+ *
  * @param isoString - The ISO 8601 date string to convert.
  * @param showAmPm - Whether to include AM/PM in the output.
  * @returns A formatted string in MM/DD/YYYY HH:MM:SS AM/PM format.
@@ -253,6 +275,9 @@ export const convertISO8601ToFormatted = (isoString: string, showAmPm = true): s
 
 /**
  * Converts a date string in YYYY-MM-DD format to MM/DD/YYYY or DD/MM/YYYY format.
+ *
+ * ⚠️ NOTE: Throws error if the input is not in YYYY-MM-DD format.
+ *
  * @param dateString - The date string in YYYY-MM-DD format.
  * @param dayFirst - Whether to display the date as DD/MM/YYYY. Defaults to false (MM/DD/YYYY).
  * @returns The formatted date string.
@@ -261,6 +286,7 @@ export const convertISO8601ToFormatted = (isoString: string, showAmPm = true): s
  * ```typescript
  * convertDateFormat('2014-10-24', false)  // Output: '10/24/2014'
  * convertDateFormat('2014-10-24', true)   // Output: '24/10/2014'
+ * convertDateFormat('05-12-2020')         // Throws error
  * ```
  */
 export const convertDateFormat = (dateString: string, dayFirst = false): string => {
@@ -277,6 +303,7 @@ export const convertDateFormat = (dateString: string, dayFirst = false): string 
 
 /**
  * Converts a Unix timestamp to MM/DD/YYYY HH:MM:SS AM/PM format.
+ *
  * @param unixTimestamp - The Unix timestamp to convert.
  * @param showAmPm - Whether to include AM/PM in the output.
  * @returns A formatted string in MM/DD/YYYY HH:MM:SS AM/PM format.
@@ -285,6 +312,7 @@ export const convertDateFormat = (dateString: string, dayFirst = false): string 
  * ```typescript
  * convertUnixToFormatted(1700418600)  // Output: '11/15/2024 01:30:00 PM'
  * convertUnixToFormatted(1700415000)  // Output: '11/15/2024 12:30:00 PM'
+ * convertUnixToFormatted(Date.now())  // wrong ❌ — will return a wrong date
  * ```
  */
 export const convertUnixToFormatted = (unixTimestamp: number, showAmPm = true): string => {
@@ -304,6 +332,9 @@ export const convertUnixToFormatted = (unixTimestamp: number, showAmPm = true): 
 
 /**
  * Converts a duration (in milliseconds) to ISO 8601 format.
+ *
+ * ⚠️ NOTE: When showAmPm is true, the output will not be a valid ISO 8601 string.
+ *
  * @param ms - The duration in milliseconds.
  * @param showAmPm - Whether to include AM/PM in the output.
  * @param includeMs - Whether to include milliseconds in the output.
@@ -312,7 +343,7 @@ export const convertUnixToFormatted = (unixTimestamp: number, showAmPm = true): 
  * **Examples:**
  * ```typescript
  * formatToISO8601(3600000)                 // Output: '2024-11-15T13:30:00'
- * formatToISO8601(7200000, true, true)     // Output: '2024-11-15T02:30:00.000 PM'
+ * formatToISO8601(7200000, true, true)     // Output: '2024-11-15T02:30:00.000 PM' ❌ Not ISO-compliant
  * formatToISO8601(10800000, false, false)  // Output: '2024-11-15T15:30:00'
  * ```
  */
@@ -344,6 +375,8 @@ export const formatToISO8601 = (ms: number, showAmPm = false, includeMs = false)
 
 /**
  * Converts a duration (in milliseconds) to Unix timestamp.
+ * Converts Date.now() + ms to Unix timestamp in seconds.
+ *
  * @param ms - The duration in milliseconds.
  * @returns The Unix timestamp.
  *
@@ -351,6 +384,7 @@ export const formatToISO8601 = (ms: number, showAmPm = false, includeMs = false)
  * ```typescript
  * formatToUnix(3600000)  // Output: 1700418600 (example based on current time)
  * formatToUnix(0)        // Output: 1700415000
+ * formatToUnix(60000)    // Output: Unix time + 60 seconds.
  * ```
  */
 export const formatToUnix = (ms: number): number => {
@@ -359,6 +393,7 @@ export const formatToUnix = (ms: number): number => {
 
 /**
  * Creates a debounced function that delays execution.
+ *
  * @param func - The function to debounce.
  * @param wait - Delay in milliseconds.
  * @returns The debounced function.
@@ -367,6 +402,9 @@ export const formatToUnix = (ms: number): number => {
  * ```typescript
  * const log = debounce(() => console.log('Called'), 2000)
  * log() // Waits 2 seconds, then logs
+ *
+ * const search = debounce((query) => fetchData(query), 500)
+ * input.addEventListener('input', e => search(e.target.value))
  * ```
  */
 export const debounce = (func: (...args: any[]) => void, wait: number) => {
@@ -380,6 +418,9 @@ export const debounce = (func: (...args: any[]) => void, wait: number) => {
 
 /**
  * Deep clones an object.
+ *
+ * ⚠️ NOTE: Does not support functions, class instances, Dates, Maps, Sets, or circular references.
+ *
  * @param obj - The object to clone.
  * @returns A deep clone of the object.
  *
@@ -393,5 +434,71 @@ export const debounce = (func: (...args: any[]) => void, wait: number) => {
  */
 export const deepClone = <T>(obj: T): T => {
   return JSON.parse(JSON.stringify(obj))
+}
+
+/**
+ * Converts a 0-based column index to a spreadsheet-style column letter.
+ *
+ * @param index - The column index (0-based).
+ * @returns The corresponding column letter.
+ *
+ * **Examples:**
+ * ```ts
+ * colIndexToLetter(0)   // 'A'
+ * colIndexToLetter(25)  // 'Z'
+ * colIndexToLetter(26)  // 'AA'
+ * colIndexToLetter(701) // 'ZZ'
+ * colIndexToLetter(702) // 'AAA'
+ * ```
+ */
+export function colIndexToLetter(index: number): string {
+  let result = ''
+  let n = index + 1
+
+  while (n > 0) {
+    const mod = (n - 1) % 26
+
+    result = String.fromCharCode(65 + mod) + result
+    n = Math.floor((n - mod) / 26)
+  }
+
+  return result
+}
+
+/**
+ * Normalizes column width values for CSS table layout.
+ * Converts numbers or raw number strings to pixel values.
+ *
+ * @param width - A number or string (e.g. 200, '200', '50%', '5em').
+ * @returns A normalized CSS width string (e.g. '200px') or undefined if invalid.
+ *
+ * **Examples:**
+ * ```ts
+ * normalizeTableColumnWidth(100)       // '100px'
+ * normalizeTableColumnWidth('250')     // '250px'
+ * normalizeTableColumnWidth('80%')     // '80%'
+ * normalizeTableColumnWidth('3em')     // '3em'
+ * normalizeTableColumnWidth(undefined) // undefined
+ * normalizeTableColumnWidth('abc')     // undefined
+ * ```
+ */
+export function normalizeTableColumnWidth(width?: string | number): string | undefined {
+  if (typeof width === 'number') {
+    return `${width}px`
+  }
+
+  if (typeof width === 'string') {
+    // If it already ends in a valid CSS unit
+    if (width.endsWith('px') || width.endsWith('%') || width.endsWith('em') || width.endsWith('rem')) {
+      return width
+    }
+
+    // Assume raw number string
+    if (!isNaN(Number(width))) {
+      return `${width}px`
+    }
+  }
+
+  return undefined
 }
 

@@ -1,10 +1,17 @@
+const webpack = require('webpack')
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 //const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const portfinder = require('portfinder')
+const dotenv = require('dotenv')
 
-// CHANGE APP TITLE BELOW. DIDN'T BOTHER WITH ISSUES IMPORTING A VARIABLE
-const APP_TITLE = 'Project Examples - React'
+
+// Import the global .env for the frontend/backend.
+dotenv.config({path: '../.env'})
+
+
+// The APP_TITLE is imported via env variables.
+const APP_TITLE = process.env.FRONTEND_WEBSITE_TITLE
+
 
 const makeHTMLTemplate = ({ htmlWebpackPlugin }) => `
   <!doctype html>
@@ -22,6 +29,7 @@ const makeHTMLTemplate = ({ htmlWebpackPlugin }) => `
   </html>
 `
 
+
 const makeHTMLPlugin = () =>
   new HtmlWebpackPlugin({
     templateContent: makeHTMLTemplate,
@@ -30,10 +38,10 @@ const makeHTMLPlugin = () =>
     publicPath: '',
   })
 
+
 // Function to find an available port and return the Webpack configuration
 module.exports = async () => {
-  const defaultPort = 3000 // Default starting port
-  const port = await portfinder.getPortPromise({ port: defaultPort })
+  const port = process.env.FRONTEND_PORT
 
   return {
     entry: './src/pages/Entry.tsx',
@@ -93,6 +101,9 @@ module.exports = async () => {
       ],
     },
     plugins: [
+      new webpack.DefinePlugin({
+        'process.env.API_BASE': JSON.stringify(process.env.API_BASE),
+      }),
       makeHTMLPlugin(),
       /*
       new MiniCssExtractPlugin({

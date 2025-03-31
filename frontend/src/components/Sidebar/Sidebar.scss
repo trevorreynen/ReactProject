@@ -1,198 +1,184 @@
-
+@use '@/styles/mixins.scss';
 
 .Sidebar {
+  @include mixins.UseScrollBar;
   width: 240px;
+  padding: 2px;
   color: #fff;
-  background-color: #151b23;
-  transition: width 0.3s ease-in-out;
+  background-color: #0d1117;
+  user-select: none;
+  border-right: 1px solid #888;
 
-  &.hidden {
-    display: none;
-  }
+  &.hidden,
+  &.minimal { display: none; }
 
+  // Hide text labels while keeping icons visible
   &.collapsed {
     width: 64px;
 
-    // Hide text labels while keeping icons visible
-    .menu-label,
-    .menu-right.arrow {
-      display: none;
-    }
+    .sidebar-dropdown {
+      .sidebar-dropdown-label {
+        .label-left {
+          justify-content: center;
+          width: 100%;
 
-    // Center icons since text is hidden
-    .menu-left {
-      justify-content: center;
-      padding-left: 0 !important; // Remove extra indentation
-      width: 100%; // Make sure icons take the full width
-    }
+          .icon-placeholder {
+            width: 26px;
+            height: 26px;
+            margin-right: 0;
+          }
 
-    .menu-icon {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+          .item-label { display: none; }
+        }
 
-    .menu-items {
-      margin-left: 8px;
-    }
-
-    .submenu-items {
-      margin-left: 8px;
-    }
-  }
-
-
-  .menu-section {
-    //border: 1px solid #f00;
-
-    &:not(:last-child) {
-      margin-bottom: 20px;
-    }
-
-    &:first-child {
-      margin-top: 20px;
-    }
-  }
-
-
-
-
-  .sidebar-menu-item {
-    display: flex; // Flexbox for layout
-    justify-content: space-between; // Ensures left and right sections align correctly
-    align-items: center; // Vertically centers child divs
-    overflow: hidden; // Hide overflowing content
-    background: #151b23;
-    //border-radius: 10px;
-    transition: background 0.2s;
-    cursor: pointer;
-
-    &.main-menu-item {
-      padding: 10px 14px;
-      //border: 1px solid #4b0082;
-
-      &:hover { background: #4c008270; }
-
-      .menu-icon {
-        width: 28px !important;
-        height: 28px !important;
-      }
-
-      .menu-label {
-        font-size: 18px !important;
-        font-weight: bold !important;
+        .label-right { display: none; }
       }
     }
+
+    .sidebar-submenu .sidebar-submenu-label .label-left { display: none; }
+    .sidebar-submenu .sidebar-submenu-label {
+      .label-right {
+        justify-content: center;
+        width: 100%;
+
+        .arrow {
+          width: 30px;
+          height: 30px;
+        }
+      }
+    }
+
+    .sidebar-group .sidebar-group-label { display: none; }
+    .sidebar-link-wrapper .sidebar-link {
+      justify-content: center;
+      width: 100%;
+
+      .icon-placeholder {
+        width: 26px;
+        height: 26px;
+        margin-right: 0;
+
+        &.empty-placeholder-icon {
+          margin-right: 0;
+        }
+      }
+
+      span { display: none; }
+    }
+
+    // Indentation for links inside dropdown.
+    .sidebar-dropdown .sidebar-dropdown-children .sidebar-link-wrapper .sidebar-link { margin-left: 0; }
+    // Indentation for links inside dropdown inside submenu.
+    .sidebar-dropdown .sidebar-dropdown-children .sidebar-submenu .sidebar-submenu-children .sidebar-link-wrapper .sidebar-link { margin-left: 0; }
+    // Indentation for links inside a group.
+    .sidebar-group .sidebar-link-wrapper .sidebar-link { margin-left: 0; }
+
   }
 
-  .menu-left {
-    display: flex;
-    align-items: center; // Vertically centers child divs
-    gap: 10px;
 
-    .menu-label {
+
+
+
+
+
+  .sidebar-dropdown,
+  .sidebar-submenu {
+    &:not(:last-child) { margin-bottom: 6px; }
+
+    .sidebar-dropdown-label,
+    .sidebar-submenu-label {
+      @include mixins.FlexSpaceBetween;
+      min-height: 38px;
+      margin: 4px;
+      padding: 0 12px 0 8px;
+      border-radius: 8px;
+      cursor: pointer;
+
+      &:hover { background-image: linear-gradient(to bottom right, #610429, #ad1216); }
+
+      .label-left {
+        @include mixins.Flex;
+
+        .item-label {
+          font-size: 16px;
+          font-weight: bold;
+        }
+      }
+
+      .label-right {
+        @include mixins.Flex;
+
+        .arrow { @include mixins.SidebarArrowStyle; }
+      }
+    }
+
+    .sidebar-dropdown-children {
+      padding: 2px 0;
+      background-color: #151b23;
+      border-top: 1px solid #888;
+      border-bottom: 1px solid #888;
+    }
+  }
+
+  .sidebar-group {
+    min-height: 38px;
+
+    &:not(:first-child) { margin-top: 16px; border-top: 1px solid #888; }
+
+    .sidebar-group-label {
+      @include mixins.Flex;
+      min-height: 38px;
+      margin: 4px;
+      padding: 0 12px 0 8px;
+      border-radius: 8px;
+
+      .icon-placeholder { margin-right: 8px; }
+    }
+  }
+
+  .sidebar-link-wrapper {
+    @include mixins.Flex;
+    min-height: 38px;
+    margin: 4px;
+    padding: 0 12px 0 8px;
+    text-decoration: none;
+    border-radius: 8px;
+
+    .sidebar-link {
+      @include mixins.Flex;
+      color: #fff;
       font-size: 14px;
     }
+
+    &.selected { background-image: linear-gradient(to bottom right, #610429, #ad1216); }
+    &:hover { background-image: linear-gradient(to bottom right, #610429, #ad1216); }
   }
 
-  .menu-right {
-    display: flex;
-    align-items: center; // Vertically centers child divs
+  .sidebar-submenu {
+    border-top: 1px solid #888;
 
-    &.arrow {
-      width: 24px;
-      height: 24px;
-      mask-image: none;
-      mask-repeat: no-repeat;
-      mask-position: center;
-      mask-size: contain;
-      background: #fff;
-      transition: transform 0.2s ease-in-out; // Smooth transition effect
+    .sidebar-submenu-label .label-left { margin-left: 16px; }
 
-      &.open-it {
-        transform: rotate(0deg);
-        mask-image: url('../../assets/icons/caret-down-md.svg');
-      }
-
-      &.close-it {
-        transform: rotate(180deg);
-        mask-image: url('../../assets/icons/caret-down-md.svg');
-      }
+    .submenu-arrow {
+      margin-left: auto;
+      font-size: 12px;
     }
   }
 
+  // Indentation for links inside dropdown.
+  .sidebar-dropdown .sidebar-dropdown-children .sidebar-link-wrapper .sidebar-link { margin-left: 16px; }
+  // Indentation for links inside dropdown inside submenu.
+  .sidebar-dropdown .sidebar-dropdown-children .sidebar-submenu .sidebar-submenu-children .sidebar-link-wrapper .sidebar-link { margin-left: 32px; }
+  // Indentation for links inside a group.
+  .sidebar-group .sidebar-link-wrapper .sidebar-link { margin-left: 16px; }
 
+  .icon-placeholder {
+    @include mixins.IconPlaceholder(20px);
+    margin-right: 8px;
 
-
-  .menu-icon {
-    width: 20px;
-    height: 20px;
-
-    mask-image: none;
-    mask-repeat: no-repeat;
-    mask-position: center;
-    mask-size: contain;
-
-    background-color: #fff;
-
-
-    &.icon-home { mask-image: url('../../assets/icons/home.svg'); }
-    &.icon-settings { mask-image: url('../../assets/icons/settings-cog.svg'); }
-    &.icon-bug { mask-image: url('../../assets/icons/bug.svg'); }
-    &.icon-temp { mask-image: url('../../assets/icons/link.svg'); }
-  }
-
-
-  .menu-items {
-    margin-left: 20px;
-    //border: 1px solid #f0f;
-
-    .menu-item {
-      text-decoration: none;
-    }
-
-    .menu-item .sidebar-menu-item {
-      display: flex;
-      align-items: center; // Vertically centers child divs
-      gap: 10px;
-      padding: 10px;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 10px;
-      transition: background 0.2s;
-
-      &:hover {
-        background: #d5000070;
-      }
-    }
-  }
-
-
-  .menu-items .menu-item.active .sidebar-menu-item {
-    background: #d50000cc;
-  }
-
-  /*
-  .menu-section:has(.menu-items .menu-item.active) .sidebar-menu-item.main-menu-item {
-    background: #4b0082cc;
-  }
-  */
-
-  .menu-section .sidebar-menu-item.main-menu-item.active {
-    background: #4b0082cc;
-  }
-
-
-  .submenu {
-    .sidebar-menu-item {
-      padding: 10px;
-      transition: background 0.2s;
-
-      &:hover { background: #4c008270; }
-    }
-
-    .submenu-items {
-      margin-left: 20px;
+    &.empty-placeholder-icon {
+      border: 1px dashed rgba(255, 255, 255, 0.5);
+      border-radius: 4px;
     }
   }
 }
