@@ -7,7 +7,7 @@ import { sequelize } from './config/database'
 
 import recipesRouter from './routes/recipes'
 import ingredientsRouter from './routes/ingredients'
-
+import nutritionRoutes from './routes/nutritionfact'
 
 
 
@@ -41,7 +41,7 @@ app.use(express.json())
 // Define API routes
 app.use('/api/recipes', recipesRouter)
 app.use('/api/ingredients', ingredientsRouter)
-
+app.use('/api/nutritionfact', nutritionRoutes)
 
 app.get('/', (req, res) => {
   res.send('API is running')

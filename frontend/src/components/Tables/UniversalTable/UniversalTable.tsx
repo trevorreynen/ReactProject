@@ -5,7 +5,7 @@ import React, { useState, useEffect, useRef } from 'react'
 
 // =========================< IMPORTS: OTHER >=================================
 import { colIndexToLetter, normalizeTableColumnWidth } from '@/utils/usefulFunctions'
-import { UniversalTableProps } from './TableTypes'
+import { UniversalTableProps } from '@/types/UniversalTableTypes'
 
 // =========================< IMPORTS: COMPONENTS >============================
 import UniversalTableCell from './UniversalTableCell'

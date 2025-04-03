@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from 'react'
 
 // =========================< IMPORTS: OTHER >=================================
-import { TableCellProps } from './TableTypes'
+import { TableCellProps } from '@/types/UniversalTableTypes'
 import { classNames, colIndexToLetter, normalizeTableColumnWidth } from '@/utils/usefulFunctions'
 
 

@@ -6,7 +6,7 @@ import { useState, useMemo } from 'react'
 
 // =========================< IMPORTS: OTHER >=================================
 import { mockData, Person } from './mockData'
-import { ColumnConfig } from '@/components/Tables/UniversalTable/TableTypes'
+import { ColumnConfig } from '@/types/UniversalTableTypes'
 
 // =========================< IMPORTS: COMPONENTS >============================
 import UniversalTable from '@/components/Tables/UniversalTable/UniversalTable'

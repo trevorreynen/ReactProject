@@ -1,3 +1,4 @@
+// import { RowData, ColumnConfig, UniversalTableProps, TableCellProps } from '@/types/UniversalTableTypes'
 
 export type RowData = Record<string, any>
 

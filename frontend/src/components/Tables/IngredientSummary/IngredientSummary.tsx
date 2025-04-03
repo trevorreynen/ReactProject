@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react'
 
 // =========================< IMPORTS: OTHER >=================================
 import { fetchIngredientSummary } from '@/api/ingredients'
-import { ColumnConfig } from '@/components/Tables/UniversalTable/TableTypes'
+import { ColumnConfig } from '@/types/UniversalTableTypes'
 
 // =========================< IMPORTS: COMPONENTS >============================
 import UniversalTable from '@/components/Tables/UniversalTable/UniversalTable'
