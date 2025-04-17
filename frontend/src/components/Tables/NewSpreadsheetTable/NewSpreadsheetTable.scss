@@ -1,0 +1,81 @@
+.NewSpreadsheetTableWrapper {
+  overflow: auto;
+  margin: 20px;
+  border: 1px solid #ccc;
+
+
+  .NewSpreadsheetTable {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+
+    color: #000;
+
+    th, td {
+      width: 100px; // default width for cells
+      height: 20px; // default height for cells
+      padding: 2px;
+      text-align: left;
+      border: 1px solid #fff;
+      cursor: default;
+    }
+
+    thead tr {
+      height: 26px;
+      min-height: 26px;
+      font-size: 16px;
+      text-align: center;
+      font-weight: bold;
+      background-color: #007aa5;
+    }
+
+    // Table body row alternating colors.
+    tbody tr:nth-child(odd)  { background-color: #ebecf0; }
+    tbody tr:nth-child(even) { background-color: #c4d8e2; }
+
+
+
+
+
+
+    .coord-cell {
+      background-color: #f0f0f0;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .spreadsheet-cell {
+      cursor: pointer;
+
+      &.selected {
+        background-color: #e0f7ff;
+      }
+
+      input {
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        border: none;
+        outline: none;
+      }
+    }
+
+
+
+
+  }
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+

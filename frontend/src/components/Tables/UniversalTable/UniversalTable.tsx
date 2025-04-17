@@ -122,15 +122,21 @@ export default function UniversalTable({ data, columns, onChange, customHeaderRo
 
             {/* Render all custom header rows, injecting coord-cell into the first */}
             {customHeaderRows?.map((row: any, headerRowIndex) => {
-              const newChildren = React.Children.map(row.props.children, (child, j) => {
-                const dataCol = colIndexToLetter(j)
+              let visualIndex = 0
 
-                return React.cloneElement(child, {
-                  key: `custom-col-${j}`,
+              const newChildren = React.Children.map(row.props.children, (child: any) => {
+                const colSpan = parseInt(child.props.colSpan ?? 1)
+                const dataCol = colIndexToLetter(visualIndex)
+
+                const cell = React.cloneElement(child, {
+                  key: `custom-col-${visualIndex}`,
                   'data-row': headerRowIndex + 1,
                   'data-col': dataCol,
                   'data-cell': `${dataCol}${headerRowIndex + 1}`,
                 })
+
+                visualIndex += colSpan
+                return cell
               })
 
               return (
@@ -147,22 +153,23 @@ export default function UniversalTable({ data, columns, onChange, customHeaderRo
             {data.map((row, rowIndex) => {
               const renderedCols: React.ReactNode[] = []
               const skipMap = new Set<number>() // Track skipped columns for colSpan
+              let renderColIndex = 0
 
               columns.forEach((col, colIndex) => {
                 if (skipMap.has(colIndex)) {
                   return
                 }
+                console.log('Skipping col index:', [...skipMap])
 
                 const value = row[col.key]
                 const colSpan = typeof col.colSpan === 'function' ? col.colSpan(value, row, rowIndex) : col.colSpan ?? 1
                 const rowSpan = typeof col.rowSpan === 'function' ? col.rowSpan(value, row, rowIndex) : col.rowSpan ?? 1
 
-                if (colSpan > 1) {
-                  for (let i = 1; i < colSpan; i++) {
-                    skipMap.add(colIndex + i)
-                  }
+                for (let i = 1; i < colSpan; i++) {
+                  skipMap.add(colIndex + i)
                 }
 
+                // renderColIndex replaces colIndex in display
                 renderedCols.push(
                   <UniversalTableCell
                     key={`${col.key}-${rowIndex}`}
@@ -170,7 +177,7 @@ export default function UniversalTable({ data, columns, onChange, customHeaderRo
                     column={col}
                     row={row}
                     rowIndex={rowIndex + headerRowCount}
-                    colIndex={colIndex}
+                    colIndex={renderColIndex}
                     onChange={(val) => onChange?.(rowIndex, col.key, val)}
                     isSelected={selectedCell?.row === rowIndex && selectedCell?.col === colIndex}
                     setSelectedCell={setSelectedCell}
@@ -180,6 +187,8 @@ export default function UniversalTable({ data, columns, onChange, customHeaderRo
                     rowSpan={rowSpan}
                   />
                 )
+
+                renderColIndex += colSpan
               })
 
               // Used to visually separate sections

@@ -42,6 +42,7 @@ export default function TestPage4() {
       editable: true,
       width: '60px',
       textStyle: { align: 'center' },
+      colSpan: () => 2,
     },
     {
       key: 'visits',
@@ -59,6 +60,7 @@ export default function TestPage4() {
       width: '75px',
       textStyle: { align: 'center' },
       format: (val: any) => `${val}%`,
+      colSpan: () => 2,
     },
     {
       key: 'status',
@@ -84,7 +86,45 @@ export default function TestPage4() {
 
       <div>Universal Table Example w/ Mock Data</div>
 
+      <UniversalTable
+        data={data}
+        columns={columns}
+        onChange={handleUpdate}
+        customHeaderRows={[
+          <tr key='custom-header-0'>
+            {(() => {
+              const skipMap = new Set<number>()
+              const headerCells: React.ReactNode[] = []
 
+              columns.forEach((col, colIndex) => {
+                if (skipMap.has(colIndex)) return
+
+                const colSpan = typeof col.colSpan === 'function'
+                  ? col.colSpan(null, {}, 0)
+                  : col.colSpan ?? 1
+
+                if (colSpan > 1) {
+                  for (let i = 1; i < colSpan; i++) {
+                    skipMap.add(colIndex + i)
+                  }
+                }
+
+                headerCells.push(
+                  <th
+                    key={`header-${colIndex}`}
+                    colSpan={colSpan}
+                    style={{ textAlign: 'center' }}
+                  >
+                    {col.label}
+                  </th>
+                )
+              })
+
+              return headerCells
+            })()}
+          </tr>
+        ]}
+      />
 
 
 
@@ -92,11 +132,3 @@ export default function TestPage4() {
   )
 }
 
-
-/*
-      <UniversalTable
-        data={data}
-        columns={columns}
-        onChange={handleUpdate}
-      />
-*/

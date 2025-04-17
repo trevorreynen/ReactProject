@@ -14,7 +14,7 @@ import nutritionRoutes from './routes/nutritionfact'
 dotenv.config({ path: path.resolve(__dirname, '../../.env') })
 
 const app = express()
-const PORT = parseInt(process.env.PORT || '3048', 10)
+const PORT = parseInt(process.env.BACKEND_PORT!)
 
 const allowedOrigins = [
   `http://localhost:${process.env.FRONTEND_PORT}`,

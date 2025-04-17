@@ -1,11 +1,11 @@
 .FullPageLoader {
-  position: fixed;
-  inset: 0;
-  background-color: #0d1113; // or your preferred dark color
+  z-index: 9999;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999;
+  position: fixed;
+  inset: 0;
+  background-color: #000;
 
   .loader-spinner {
     width: 48px;
