@@ -54,7 +54,7 @@ const menuItems: SidebarItem[] = [
       {
         type: 'group',
         key: 'group1',
-        label: 'Item 1 (with placeholder)',
+        label: 'Item 1 (w/ placeholder)',
         iconClass: '',
         children: [
           { type: 'link', key: '1', label: 'Test Page 1', path: '/test-page-1', iconClass: 'icon-link' },
@@ -64,7 +64,7 @@ const menuItems: SidebarItem[] = [
       {
         type: 'group',
         key: 'group2',
-        label: 'Item 2 (with no icon)',
+        label: 'Item 2 (w/ no icon)',
         iconClass: 'no-icon',
         children: [
           { type: 'link', key: '3', label: 'Test Page 3', path: '/test-page-3', iconClass: 'icon-link' },
@@ -114,7 +114,8 @@ const menuItems: SidebarItem[] = [
       { type: 'link', key: '13', label: 'Option 13', path: '/option-13', iconClass: 'icon-link' },
       { type: 'link', key: '14', label: 'Option 14', path: '/option-14', iconClass: 'icon-link' }
     ]
-  }
+  },
+  { type: 'link', key: 'link-1', label: 'Home', path: '/home', iconClass: 'icon-link' },
 ]
 
 
