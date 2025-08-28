@@ -1,8 +1,19 @@
-**/.!other/
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+
+# Auto-generated folders/files.
 **/node_modules/
-**/.env
-**/z-changes.txt
+**/__pycache__/
+
+
+# Random folders of mine.
+**/!other/
 **/backend-2/
 **/.vscode/
+
+
+# Files.
+**/.env
+**/z-changes.txt
 **/notes.txt
 
